@@ -12,14 +12,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dbroadhurst/react-storbook-package-boilerplate"
+    "url": "https://github.com/dbroadhurst/react-image-dropzone"
   },
-  "keywords": [
-    "storybook",
-    "react",
-    "drag",
-    "drop"
-  ],
+  "keywords": ["storybook", "react", "drag", "drop"],
   "author": "David Broadhurst",
   "license": "MIT",
   "dependencies": {
