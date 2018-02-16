@@ -1,3 +1,3 @@
 import ImageDropZone from './components/ImageDropZone'
 
-export { ImageDropZone }
+export default ImageDropZone
