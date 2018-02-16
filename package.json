@@ -1,6 +1,6 @@
 {
   "name": "react-image-dropzone",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A component to enble image file drag and drop",
   "main": "./dist/index.js",
   "scripts": {
@@ -13,7 +13,12 @@
     "type": "git",
     "url": "https://github.com/dbroadhurst/react-storbook-package-boilerplate"
   },
-  "keywords": ["storybook", "react", "drag", "drop"],
+  "keywords": [
+    "storybook",
+    "react",
+    "drag",
+    "drop"
+  ],
   "author": "David Broadhurst",
   "license": "MIT",
   "dependencies": {
