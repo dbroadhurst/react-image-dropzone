@@ -2,21 +2,41 @@
 
 A component that enables react developers to add image drag and drop to a page
 
-![](screenshot.png)
+![](https://s3-us-west-2.amazonaws.com/union25-public/react-image-dropzone-screenshot.png)
 
 [React Storybook](https://storybook.js.org/)
 
 ### Install
 
 ```bash
-git clone git@github.com:dbroadhurst/react-storybook-package-boilerplate.git
-npm install
+npm install react-image-dropzone
 ```
 
-### Run
+### Examples
 
-```bash
-npm run storybook
+```javascript
+const imagePicked = image => console.log(image)
+
+<ImageDropZone
+  width={640}
+  height={359}
+  imagePicked={imagePicked}
+/>
+
+<ImageDropZone
+  anySize
+  width={512}
+  height={512}
+  imagePicked={imagePicked
+/>
+
+<ImageDropZone
+  anySize
+  showButton
+  width={512}
+  height={512}
+  imagePicked={imagePicked}
+/>
 ```
 
 Open browser and navigate to http://localhost:9001
