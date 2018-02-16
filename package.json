@@ -7,18 +7,14 @@
     "start": "webpack --watch",
     "build": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook-build": "build-storybook -c .storybook -o .out"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/dbroadhurst/react-storbook-package-boilerplate"
   },
-  "keywords": [
-    "storybook",
-    "react",
-    "drag",
-    "drop"
-  ],
+  "keywords": ["storybook", "react", "drag", "drop"],
   "author": "David Broadhurst",
   "license": "MIT",
   "dependencies": {

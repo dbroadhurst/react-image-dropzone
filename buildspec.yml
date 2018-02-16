@@ -7,4 +7,10 @@ phases:
       - npm run build
       - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - npm publish
-      
+      - npm run storybook-build
+      - aws s3 rm s3://react-image-dropzone.dbroadhurst.net --recursive
+      - aws s3 cp .out s3://react-image-dropzone.dbroadhurst.net --recursive --acl public-read
+
+artifacts:
+  files:
+    build/**/*      
