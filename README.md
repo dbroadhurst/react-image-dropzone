@@ -38,5 +38,3 @@ const imagePicked = image => console.log(image)
   imagePicked={imagePicked}
 />
 ```
-
-### Storybook

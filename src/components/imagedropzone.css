@@ -1,6 +1,6 @@
 .button {
   padding: 8px;
-  box-shadow: 5px 5px 10px rgb(64, 64, 64);
+  box-shadow: 1px 1px 2px rgb(64, 64, 64);
   text-align: center;
   background-color: rgb(230, 230, 230);
   transition: 0.5s;
