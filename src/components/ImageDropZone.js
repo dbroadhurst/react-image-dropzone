@@ -43,8 +43,9 @@ class ImageDropZone extends Component {
 
   handleFile = event => {
     let image = URL.createObjectURL(event.target.files[0])
-    this.setState({ image: URL.createObjectURL(event.target.files[0]) })
-    this.props.imagePicked(image)
+    let file = event.target.files[0]
+    this.setState({ file, image })
+    this.props.imagePicked({ file, image })
   }
 
   onDragOver = event => {
@@ -61,12 +62,14 @@ class ImageDropZone extends Component {
 
   onDrop = event => {
     event.preventDefault()
-    let image = URL.createObjectURL(event.dataTransfer.files[0])
+    let file = event.dataTransfer.files[0]
+    let image = URL.createObjectURL(file)
+
     this.setState({
       image,
       over: false
     })
-    this.props.imagePicked(image)
+    this.props.imagePicked({ image, file })
   }
 
   onLoad = event => {
