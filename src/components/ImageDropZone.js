@@ -31,6 +31,9 @@ class ImageDropZone extends Component {
   static propTypes = {
     anySize: PropTypes.bool,
     showButton: PropTypes.bool,
+    imageWidth: PropTypes.number,
+    imageHeight: PropTypes.number,
+    imageDefault: PropTypes.string,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     imagePicked: PropTypes.func
@@ -74,12 +77,12 @@ class ImageDropZone extends Component {
 
   onLoad = event => {
     const { naturalWidth, naturalHeight } = event.target
-    const { width, height, anySize } = this.props
+    const { imageWidth, imageHeight, anySize } = this.props
 
     if (
       !anySize &&
-      ((width && width !== naturalWidth) ||
-        (height && height !== naturalHeight))
+      ((imageWidth && imageWidth !== naturalWidth) ||
+        (imageHeight && imageHeight !== naturalHeight))
     ) {
       this.setState({
         error: `Wrong image dimensions ${naturalWidth}x${naturalHeight}`,
@@ -92,7 +95,15 @@ class ImageDropZone extends Component {
 
   render() {
     const { image, error, over } = this.state
-    const { width, height, anySize, showButton } = this.props
+    const {
+      width,
+      height,
+      imageWidth,
+      imageHeight,
+      imageDefault,
+      anySize,
+      showButton
+    } = this.props
 
     return (
       <div>
@@ -106,7 +117,7 @@ class ImageDropZone extends Component {
             {
               width: `${width}px`,
               height: `${height}px`,
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url(${image ? image : imageDefault})`,
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
               backgroundSize: 'contain'
@@ -122,11 +133,11 @@ class ImageDropZone extends Component {
               <div style={style.label}>
                 {!anySize ? (
                   <div>
-                    {width} x {height}
+                    {imageWidth} x {imageHeight}
                   </div>
-                ) : (
+                ) : !imageDefault ? (
                   'Drop Here'
-                )}
+                ) : null}
 
                 <div>{error}</div>
               </div>
