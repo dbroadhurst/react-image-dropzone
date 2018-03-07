@@ -24,7 +24,6 @@ storiesOf('File Drop Zone', module)
       height={512}
       imageWidth={512}
       imageHeight={512}
-      imageDefault={imageDefault}
       imagePicked={imagePicked}
     />
   ))
@@ -33,6 +32,15 @@ storiesOf('File Drop Zone', module)
       style={{ width: '512px', height: '512px' }}
       anySize
       showButton
+      width={512}
+      height={512}
+      imagePicked={imagePicked}
+    />
+  ))
+  .add('Image Drop default image Any Size', () => (
+    <ImageDropZone
+      style={{ width: '512px', height: '512px' }}
+      anySize
       width={512}
       height={512}
       imageDefault={imageDefault}

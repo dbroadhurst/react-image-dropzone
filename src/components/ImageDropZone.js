@@ -127,17 +127,23 @@ class ImageDropZone extends Component {
           )}
         >
           {image !== null ? (
-            <img onLoad={this.onLoad} src={image} alt="" width={0} height={0} />
+            <img
+              onLoad={this.onLoad}
+              src={image}
+              alt={image}
+              width={0}
+              height={0}
+            />
           ) : (
             <div style={{ pointerEvents: 'none' }}>
               <div style={style.label}>
-                {!anySize ? (
+                {imageDefault ? null : !anySize ? (
                   <div>
                     {imageWidth} x {imageHeight}
                   </div>
-                ) : !imageDefault ? (
+                ) : (
                   'Drop Here'
-                ) : null}
+                )}
 
                 <div>{error}</div>
               </div>
