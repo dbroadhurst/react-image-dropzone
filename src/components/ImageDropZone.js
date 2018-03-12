@@ -72,7 +72,8 @@ class ImageDropZone extends Component {
       image,
       over: false
     })
-    this.props.imagePicked({ image, file })
+    console.log(event)
+    this.props.imagePicked(event, { image, file })
   }
 
   onLoad = event => {
