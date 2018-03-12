@@ -33,6 +33,7 @@ class ImageDropZone extends Component {
     showButton: PropTypes.bool,
     imageWidth: PropTypes.number,
     imageHeight: PropTypes.number,
+    imageIndex: PropTypes.number,
     imageDefault: PropTypes.string,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
@@ -48,7 +49,7 @@ class ImageDropZone extends Component {
     let image = URL.createObjectURL(event.target.files[0])
     let file = event.target.files[0]
     this.setState({ file, image })
-    this.props.imagePicked(this)
+    this.props.imagePicked({ index: this.props.imageIndex, file, image })
   }
 
   onDragOver = event => {
@@ -72,7 +73,7 @@ class ImageDropZone extends Component {
       image,
       over: false
     })
-    this.props.imagePicked(this)
+    this.props.imagePicked({ index: this.props.imageIndex, file, image })
   }
 
   onLoad = event => {
