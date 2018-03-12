@@ -1,6 +1,6 @@
 {
   "name": "react-image-dropzone",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A component to enble image file drag and drop",
   "main": "./dist/index.js",
   "scripts": {
