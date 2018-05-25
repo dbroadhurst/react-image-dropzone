@@ -31,13 +31,15 @@ class ImageDropZone extends Component {
   static propTypes = {
     anySize: PropTypes.bool,
     showButton: PropTypes.bool,
+    showDeleteButton: PropTypes.bool,
     imageWidth: PropTypes.number,
     imageHeight: PropTypes.number,
     imageIndex: PropTypes.number,
     imageDefault: PropTypes.string,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    imagePicked: PropTypes.func
+    imagePicked: PropTypes.func,
+    imageDeleted: PropTypes.func
   }
 
   constructor(props) {
@@ -50,6 +52,12 @@ class ImageDropZone extends Component {
     let file = event.target.files[0]
     this.setState({ file, image })
     this.props.imagePicked({ index: this.props.imageIndex, file, image })
+  }
+
+  deleteFile = event => {
+    const { imageDeleted } = this.props
+
+    imageDeleted(this.props)
   }
 
   onDragOver = event => {
@@ -80,11 +88,7 @@ class ImageDropZone extends Component {
     const { naturalWidth, naturalHeight } = event.target
     const { imageWidth, imageHeight, anySize } = this.props
 
-    if (
-      !anySize &&
-      ((imageWidth && imageWidth !== naturalWidth) ||
-        (imageHeight && imageHeight !== naturalHeight))
-    ) {
+    if (!anySize && ((imageWidth && imageWidth !== naturalWidth) || (imageHeight && imageHeight !== naturalHeight))) {
       this.setState({
         error: `Wrong image dimensions ${naturalWidth}x${naturalHeight}`,
         image: null
@@ -96,15 +100,7 @@ class ImageDropZone extends Component {
 
   render() {
     const { image, error, over } = this.state
-    const {
-      width,
-      height,
-      imageWidth,
-      imageHeight,
-      imageDefault,
-      anySize,
-      showButton
-    } = this.props
+    const { width, height, imageWidth, imageHeight, imageDefault, anySize, showButton, showDeleteButton } = this.props
 
     return (
       <div>
@@ -125,16 +121,9 @@ class ImageDropZone extends Component {
             },
             style.frame,
             over ? style.enter : style.leave
-          )}
-        >
+          )}>
           {image !== null ? (
-            <img
-              onLoad={this.onLoad}
-              src={image}
-              alt={image}
-              width={0}
-              height={0}
-            />
+            <img onLoad={this.onLoad} src={image} alt={image} width={0} height={0} />
           ) : (
             <div style={{ pointerEvents: 'none' }}>
               <div style={style.label}>
@@ -152,18 +141,25 @@ class ImageDropZone extends Component {
           )}
         </div>
 
-        {showButton ? (
-          <div className="button-container">
-            <label className="button">
-              Choose File
-              <input
-                style={{ display: 'none' }}
-                type="file"
-                onChange={this.handleFile}
-              />
-            </label>
-          </div>
-        ) : null}
+        <div style={{ display: 'flex' }}>
+          {showButton ? (
+            <div className="button-container">
+              <label className="button">
+                Choose File
+                <input style={{ display: 'none' }} type="file" onChange={this.handleFile} />
+              </label>
+            </div>
+          ) : null}
+
+          {showDeleteButton ? (
+            <div className="button-container">
+              <label className="button">
+                Delete
+                <button style={{ display: 'none' }} type="button" onClick={this.deleteFile} />
+              </label>
+            </div>
+          ) : null}
+        </div>
       </div>
     )
   }
