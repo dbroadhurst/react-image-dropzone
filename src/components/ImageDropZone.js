@@ -44,7 +44,7 @@ class ImageDropZone extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { image: null, error: '', over: false }
+    this.state = { image: null, error: '', over: false, deleted: false }
   }
 
   handleFile = event => {
@@ -100,7 +100,7 @@ class ImageDropZone extends Component {
   }
 
   render() {
-    const { image, error, over } = this.state
+    const { image, error, over, deleted } = this.state
     const { width, height, imageWidth, imageHeight, imageDefault, anySize, showButton, showDeleteButton } = this.props
 
     return (
@@ -115,7 +115,7 @@ class ImageDropZone extends Component {
             {
               width: `${width}px`,
               height: `${height}px`,
-              backgroundImage: `url(${image ? image : imageDefault})`,
+              backgroundImage: `url(${image ? image : !deleted ? imageDefault : null})`,
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
               backgroundSize: 'contain'
