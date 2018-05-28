@@ -47,18 +47,38 @@ class ImageDropZone extends Component {
     this.state = { image: null, error: '', over: false, deleted: false }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    // if deleted the don't reset to image default
+    if (state.deleted) {
+      return null
+    }
+
+    // set image default
+    if (!state.image && props.imageDefault) {
+      return { image: props.imageDefault }
+    } else {
+      return null
+    }
+  }
+
   handleFile = event => {
+    const { imagePicked } = this.props
+
     let image = URL.createObjectURL(event.target.files[0])
     let file = event.target.files[0]
     this.setState({ file, image })
-    this.props.imagePicked({ index: this.props.imageIndex, file, image })
+    imagePicked({ index: this.props.imageIndex, file, image })
   }
 
   deleteFile = event => {
-    const { imageDeleted } = this.props
-    this.setState({ image: null, deleted: true })
+    const { imageDeleted, imagePicked } = this.props
 
-    imageDeleted(this.props)
+    imagePicked({ index: this.props.imageIndex, file: null, image: null })
+    if (imageDeleted) {
+      imageDeleted(this.props)
+    }
+
+    this.setState({ image: null, deleted: true })
   }
 
   onDragOver = event => {
@@ -115,7 +135,7 @@ class ImageDropZone extends Component {
             {
               width: `${width}px`,
               height: `${height}px`,
-              backgroundImage: `url(${image ? image : !deleted ? imageDefault : null})`,
+              backgroundImage: `url(${image ? image : ''})`,
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
               backgroundSize: 'contain'
@@ -128,14 +148,13 @@ class ImageDropZone extends Component {
           ) : (
             <div style={{ pointerEvents: 'none' }}>
               <div style={style.label}>
-                {imageDefault ? null : !anySize ? (
+                {!anySize ? (
                   <div>
                     {imageWidth} x {imageHeight}
                   </div>
                 ) : (
                   'Drop Here'
                 )}
-
                 <div>{error}</div>
               </div>
             </div>
@@ -147,7 +166,7 @@ class ImageDropZone extends Component {
             <div className="button-container">
               <label className="button">
                 Choose File
-                <input style={{ display: 'none' }} type="file" onChange={this.handleFile} />
+                <input style={{ display: 'none' }} type="file" value="" onChange={this.handleFile} />
               </label>
             </div>
           ) : null}
