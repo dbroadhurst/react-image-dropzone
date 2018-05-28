@@ -56,7 +56,7 @@ class ImageDropZone extends Component {
 
   deleteFile = event => {
     const { imageDeleted } = this.props
-    this.setState({ image: null })
+    this.setState({ image: null, deleted: true })
 
     imageDeleted(this.props)
   }
