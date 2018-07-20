@@ -47,3 +47,14 @@ storiesOf('File Drop Zone', module)
       imagePicked={imagePicked}
     />
   ))
+  .add('Image Drop default image Any Size small font', () => (
+    <ImageDropZone
+      style={{ width: '512px', height: '512px' }}
+      anySize
+      width={512}
+      height={512}
+      fontSize={16}
+      imageDefault={imageDefault}
+      imagePicked={imagePicked}
+    />
+  ))

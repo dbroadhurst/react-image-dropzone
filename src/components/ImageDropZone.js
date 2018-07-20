@@ -35,6 +35,7 @@ class ImageDropZone extends Component {
     imageWidth: PropTypes.number,
     imageHeight: PropTypes.number,
     imageIndex: PropTypes.number,
+    fontSize: PropTypes.number,
     imageDefault: PropTypes.string,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
@@ -121,7 +122,17 @@ class ImageDropZone extends Component {
 
   render() {
     const { image, error, over, deleted } = this.state
-    const { width, height, imageWidth, imageHeight, imageDefault, anySize, showButton, showDeleteButton } = this.props
+    const {
+      width,
+      height,
+      imageWidth,
+      imageHeight,
+      imageDefault,
+      anySize,
+      showButton,
+      showDeleteButton,
+      fontSize
+    } = this.props
 
     return (
       <div>
@@ -147,7 +158,7 @@ class ImageDropZone extends Component {
             <img onLoad={this.onLoad} src={image} alt={image} width={0} height={0} />
           ) : (
             <div style={{ pointerEvents: 'none' }}>
-              <div style={style.label}>
+              <div style={{ ...style.label, fontSize: fontSize ? `${fontSize}px` : '34px' }}>
                 {!anySize ? (
                   <div>
                     {imageWidth} x {imageHeight}
